@@ -22,6 +22,7 @@ ASFLAGS     += -g
 ASFLAGS     += --cpu 65SC02
 
 BUILD_DIR=build/x16
+EMU_DIR=../x16-emulator
 
 CFG_DIR=$(BUILD_DIR)/cfg
 
@@ -327,6 +328,9 @@ ROM_LST=$(BUILD_DIR)/rom_lst.h
 GIT_SIGNATURE=$(BUILD_DIR)/../signature.bin
 
 all: $(BUILD_DIR)/rom.bin $(ROM_LABELS) $(ROM_LST)
+
+install: all
+	cp $(BUILD_DIR)/rom.bin $(EMU_DIR)/rom.bin
 
 $(BUILD_DIR)/rom.bin: $(BANK_BINS)
 	cat $(BANK_BINS) > $@
